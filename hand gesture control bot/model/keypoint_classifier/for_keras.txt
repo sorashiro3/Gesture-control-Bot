@@ -1,0 +1,25 @@
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+import numpy as np
+import tensorflow as tf
+
+class KeyPointClassifier(object):
+    def __init__(
+        self,
+        model_path='model/keypoint_classifier/keypoint_classifier.keras'
+    ):
+        self.model = tf.keras.models.load_model(model_path)
+
+    def __call__(
+        self,
+        landmark_list,
+    ):
+        # Preprocess input data if needed
+        # For example, convert the landmark_list to the appropriate format
+        
+        # Perform inference using the loaded Keras model
+        result = self.model.predict(np.array([landmark_list]))  # Assuming landmark_list is in the correct format
+        
+        result_index = np.argmax(result)
+
+        return result_index
